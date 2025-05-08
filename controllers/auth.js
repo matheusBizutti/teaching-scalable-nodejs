@@ -1,3 +1,3 @@
 exports.getAccess = (req, res) => {
-    res.json({status: 'ok'});
+    res.json({status: 'Ok'});
 };
