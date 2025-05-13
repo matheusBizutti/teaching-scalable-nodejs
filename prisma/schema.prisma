@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(uuid()) @db.Uuid
+  email    String   @unique
+  username  String   @unique // Add the username field and make it unique
+  password String
+  address  Address?
+  cart     Cart?    // A user can have one cart (optional, because they might not have added anything to the cart yet)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Address {
+  id           String      @id @default(uuid()) @db.Uuid
+  street       String
+  number       String
+  city         String
+  state        String
+  postalCode   PostalCode  @relation(fields: [postalCodeId], references: [id])
+  postalCodeId String      @db.Uuid
+  user         User        @relation(fields: [userId], references: [id])
+  userId       String      @unique @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PostalCode {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique
+  addresses Address[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String       @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  price       Float
+  carts       CartProduct[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id        String        @id @default(uuid()) @db.Uuid
+  user      User?          @relation(fields: [userId], references: [id]) // Optional, a user might not have a cart
+  userId    String?        @unique @db.Uuid  // Make userId unique here for the one-to-one relation
+  products  CartProduct[]
+  order     Order?         // Link the cart to an order if it's placed
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CartProduct {
+  id        String   @id @default(uuid()) @db.Uuid
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  cartId    String   @db.Uuid
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String   @db.Uuid
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id        String   @id @default(uuid()) @db.Uuid
+  cart      Cart     @relation(fields: [cartId], references: [id]) // The order is tied to a cart
+  cartId    String   @unique @db.Uuid
+  createdAt DateTime @default(now()) 
+}
