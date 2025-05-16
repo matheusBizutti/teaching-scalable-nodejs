@@ -2,10 +2,10 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: teaching-scalable-nodejs
-  description: Projeto de ensino sobre Node.js escalável
+  description: Teaching nodeJS
   annotations:
     github.com/project-slug: matheusBizutti/teaching-scalable-nodejs
 spec:
   type: service
-  lifecycle: experimental
-  owner: dx-team
+  owner: dev-experience-team
+  lifecycle: production
