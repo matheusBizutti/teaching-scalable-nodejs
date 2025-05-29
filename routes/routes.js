@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/auth');
 const productController = require('../controllers/product');
+const authenticate = require('../middlewares/authenticate')
 
 router.post('/auth/sso', authController.create);
-router.get('/products', productController.getAll);
+router.post('/auth/sso/login', authController.login);
+router.get('/products', authenticate, productController.getAll);
 
 module.exports = router;

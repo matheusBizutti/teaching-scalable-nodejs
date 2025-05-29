@@ -1,13 +1,14 @@
+const dotenv = require('dotenv');
+
+// Load environment variables from .env file
+dotenv.config();
+
 const express = require('express');
 const routes = require('./routes/routes');
 const errorHandler = require('./middlewares/error-handler');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const dotenv = require('dotenv');
-
-// Load environment variables from .env file
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
