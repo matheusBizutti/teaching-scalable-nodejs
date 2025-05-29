@@ -8,7 +8,7 @@ Whether you're new to backend development or looking to deepen your skills in No
 
 ## Goals
 
-- **Learn Node.js**: Build API applications with Node.js, focusing on best practices.
+- **Learn Node.js**: Build API's applications with Node.js, focusing on best practices.
 - **Understand Scalable Architecture**: Learn how to design and build scalable backend systems.
 - **Practice with Databases**: Set up and interact with databases, starting with SQL and expanding to NoSQL solutions.
 - **Cloud Integration**: Implement cloud-native patterns with AWS or other cloud services.
