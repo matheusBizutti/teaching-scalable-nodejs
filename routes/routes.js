@@ -6,6 +6,8 @@ const authenticate = require('../middlewares/authenticate')
 
 router.post('/auth/sso', authController.create);
 router.post('/auth/sso/login', authController.login);
-router.get('/products', authenticate, productController.getAll);
+router.get('/products', authenticate, productController.products);
+router.post('/products/create', authenticate, productController.create);
+
 
 module.exports = router;
