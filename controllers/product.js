@@ -30,10 +30,10 @@ const create = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
-
+  
   try {
     const product = await prisma.product.delete({
-      where: { id: parseInt(id) },
+      where: {id: id},
     });
     res.status(200).json({ message: 'Product deleted successfully', product });
   } catch (error) {
