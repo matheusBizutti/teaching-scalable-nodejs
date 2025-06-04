@@ -8,6 +8,6 @@ router.post('/auth/sso', authController.create);
 router.post('/auth/sso/login', authController.login);
 router.get('/products', authenticate, productController.products);
 router.post('/products/create', authenticate, productController.create);
-
+router.delete('/products/deleteProduct', authenticate, productController.deleteProduct);
 
 module.exports = router;
